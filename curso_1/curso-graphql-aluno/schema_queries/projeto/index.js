@@ -1,5 +1,4 @@
 const { ApolloServer, gql } = require('apollo-server')
-const { usuarioLogado } = require('../../../curso-graphql-master/schema-query/projeto/resolvers/Query')
 
 const typeDefs = gql`
     scalar Date
