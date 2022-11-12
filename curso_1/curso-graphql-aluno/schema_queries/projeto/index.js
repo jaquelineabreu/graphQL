@@ -1,10 +1,23 @@
 const { ApolloServer, gql } = require('apollo-server')
+const { usuarioLogado } = require('../../../curso-graphql-master/schema-query/projeto/resolvers/Query')
 
 const typeDefs = gql`
+    scalar Date
+
+    type Usuario{
+        id: ID!
+        nome:String!
+        email:String!
+        idade:Int
+        salario: Float
+        vip:Boolean
+    }
+
     #Pontos de entrada da sua API!
     type Query{
         ola:String
-        horaAtual:String
+        horaAtual:Date!
+        usuarioLogado: Usuario
     }
 `
 
@@ -14,7 +27,17 @@ const resolvers = {
             return 'Olá, mundo!'
         },
         horaAtual(){
-            return `${new Date}`
+            return new Date
+        },
+        usuarioLogado(){
+            return{
+                id:1,
+                nome:'Ana da Web',
+                email:'anadaweb@email.com',
+                idade:23,
+                salario:1234.56,
+                vip: true
+            }
         }
     }
 }
