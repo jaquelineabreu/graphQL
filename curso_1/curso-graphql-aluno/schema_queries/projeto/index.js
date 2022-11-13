@@ -10,6 +10,7 @@ const typeDefs = gql`
         idade:Int
         salario: Float
         vip:Boolean
+        blabla:String
     }
 
     #Pontos de entrada da sua API!
@@ -21,6 +22,15 @@ const typeDefs = gql`
 `
 
 const resolvers = {
+    //resolve salario 
+    Usuario:{
+        salario(usuario){
+            return usuario.salario_real
+        },
+        blabla(usuario){
+            return 'Opa'
+        }
+    },
     Query: {
         ola(){
             return 'Olá, mundo!'
@@ -28,13 +38,14 @@ const resolvers = {
         horaAtual(){
             return new Date
         },
-        usuarioLogado(){
+        usuarioLogado(obj){
+            console.log(obj)
             return{
                 id:1,
                 nome:'Ana da Web',
                 email:'anadaweb@email.com',
                 idade:23,
-                salario:1234.56,
+                salario_real:1234.56,
                 vip: true
             }
         }
