@@ -18,16 +18,22 @@ const usuarios = [{
 
 }]
 
+const perfis = [
+    {id:1, nome:'comum'},
+    {id:2, nome:'administrador'}
+]
+
 const typeDefs = gql`
     scalar Date
 
+    
     type Produto{
         nome:String!
         preco:Float!
         desconto:Float       
         precoComDesconto:Float
     }
-
+    
     type Usuario{
         id: Int!
         nome:String!
@@ -36,6 +42,12 @@ const typeDefs = gql`
         salario: Float
         vip:Boolean
         blabla:String
+    }
+    
+    type Perfil{
+        id:Int
+        nome:String
+        code:Int
     }
 
     #Pontos de entrada da sua API!
@@ -47,6 +59,8 @@ const typeDefs = gql`
         numerosMegaSena:[Int!]!
         usuarios:[Usuario]
         usuario(id:Int): Usuario
+        perfis:[Perfil]
+        perfil(id:Int):Perfil
     }
 `
 
@@ -108,7 +122,15 @@ const resolvers = {
         usuario(_, { id } ){
             const sels = usuarios.filter(u => u.id === id)
             return sels ? sels[0]: null
+        },
+        perfis(){
+            return perfis
+        },
+        perfil(_, {id}){
+            const sels = perfis.filter(p => p.id === id)
+            return sels ? sels[0]: null
         }
+        
     }
 }
 
