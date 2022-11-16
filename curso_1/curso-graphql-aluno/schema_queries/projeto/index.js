@@ -5,16 +5,19 @@ const usuarios = [{
     nome:'João da Silva',
     email:'joaosilva@email.com',
     idade:29,
+    perfil_id:1
 },{
     id:2,
     nome:'Rafael Junior',
     email:'rafajunior@email.com',
     idade:31,  
+    perfil_id:2
 },{
     id:3,
     nome:'Daniela Smith',
     email:'danismith@email.com',
     idade:24,  
+    perfil_id:1
 
 }]
 
@@ -42,12 +45,13 @@ const typeDefs = gql`
         salario: Float
         vip:Boolean
         blabla:String
+        perfil:Perfil
     }
     
     type Perfil{
         id:Int
         nome:String
-        code:Int
+       
     }
 
     #Pontos de entrada da sua API!
@@ -81,6 +85,10 @@ const resolvers = {
         },
         blabla(usuario){
             return 'Opa'
+        },
+        perfil(usuario){
+            const sels = perfis.filter(p => p.id === usuario.perfil_id)
+            return sels ? sels[0]: null
         }
     },
     Query: {
